@@ -18,8 +18,8 @@ export class ListeJoueursComponent implements OnInit {
 
 
   ngOnInit() : void {
-    // this.joueursService.recupererJoueurs().subscribe(data => {
-    //   this.joueurs.push(data);
-    // });
+    this.joueursService.recupererJoueurs().subscribe(data => {
+      this.joueurs.push(data);
+    });
   }
 }
