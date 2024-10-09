@@ -20,6 +20,8 @@ export class ListeJoueursComponent implements OnInit {
 
     this.joueursService.recupererJoueurs().subscribe(data => {
       this.joueurs = data;
-    })
+    });
+
+    console.log(this.joueursService.recupererLogins())
   }
 }
