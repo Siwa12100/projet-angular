@@ -8,13 +8,23 @@ import { joueur } from '../modeles/joueur';
 })
 export class JoueursService {
 
-  protected urlApi : string;
+  protected urlApi : string = "https://664ba07f35bbda10987d9f99.mockapi.io/api/users";
+  protected joueurs : joueur[] = [];
 
-  constructor(protected httpClient : HttpClient) { 
-    this.urlApi = "https://664ba07f35bbda10987d9f99.mockapi.io/api/users";
+  constructor(protected httpClient : HttpClient) {
+
+    this.httpClient.get<joueur[]>(this.urlApi).subscribe(data => {
+      data.forEach( joueur => {
+        this.ajouterJoueur(joueur);
+      });
+    });
   }
 
-  recupererJoueurs() : Observable<joueur> {
-    return this.httpClient.get<joueur>(this.urlApi);
+  public recupererJoueurs() : joueur[] {
+    return this.joueurs;    
+  }
+
+  protected ajouterJoueur(joueur : joueur) : void {
+    this.joueurs.push(joueur)
   }
 }
