@@ -20,8 +20,8 @@ export class JoueursService {
     });
   }
 
-  public recupererJoueurs() : joueur[] {
-    return this.joueurs;    
+  public recupererJoueurs() : Observable<joueur[]> {
+    return this.httpClient.get<joueur[]>(this.urlApi); 
   }
 
   protected ajouterJoueur(joueur : joueur) : void {

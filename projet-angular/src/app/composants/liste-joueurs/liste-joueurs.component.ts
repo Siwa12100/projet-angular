@@ -19,6 +19,8 @@ export class ListeJoueursComponent implements OnInit {
 
   ngOnInit() : void {
 
-    this.joueurs = this.joueursService.recupererJoueurs();
+    this.joueursService.recupererJoueurs().subscribe(data => {
+      this.joueurs = data;
+    })
   }
 }
