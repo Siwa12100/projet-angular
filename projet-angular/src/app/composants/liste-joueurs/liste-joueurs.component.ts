@@ -17,12 +17,10 @@ export class ListeJoueursComponent implements OnInit {
 
   constructor(protected joueursService : JoueursService, protected authService : AuthentificationService) {}
 
-
   ngOnInit() : void {
     this.authService.onInit()
-
     this.joueursService.recupererJoueurs().subscribe(data => {
-      this.joueurs.push(data);
-    });
+      this.joueurs = data;
+    })
   }
 }

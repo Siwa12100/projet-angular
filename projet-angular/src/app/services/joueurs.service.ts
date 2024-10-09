@@ -8,13 +8,11 @@ import { joueur } from '../modeles/joueur';
 })
 export class JoueursService {
 
-  protected urlApi : string;
+  protected urlApi : string = "https://664ba07f35bbda10987d9f99.mockapi.io/api/users";
 
-  constructor(protected httpClient : HttpClient) { 
-    this.urlApi = "https://664ba07f35bbda10987d9f99.mockapi.io/api/users";
-  }
+  constructor(protected httpClient : HttpClient) {}
 
-  recupererJoueurs() : Observable<joueur> {
-    return this.httpClient.get<joueur>(this.urlApi);
+  public recupererJoueurs() : Observable<joueur[]> {
+    return this.httpClient.get<joueur[]>(this.urlApi); 
   }
 }
