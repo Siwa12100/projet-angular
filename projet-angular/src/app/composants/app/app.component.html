@@ -1,8 +1,10 @@
-<h1> Debut du projet </h1>
+<h1>Angular Router App</h1>
+<nav>
+  <ul>
+    <li><a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a></li>
+    <li><a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a></li>
+  </ul>
+</nav>
 
-<app-tests-cmpt></app-tests-cmpt>
-
-<app-liste-joueurs></app-liste-joueurs>
-
-<app-login-form></app-login-form>
-
+<!-- The routed views render in the <router-outlet>-->
+<router-outlet></router-outlet>
