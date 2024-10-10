@@ -8,6 +8,8 @@
       <label for="password">Mot de passe</label>
       <input type="password" id="password" formControlName="password" />
     </div>
-  
+    <div *ngIf="submitError">
+      <p style="color: red;">Nom d'utilisateur ou mot de passe incorrect !</p>
+    </div>
     <button type="submit" [disabled]="loginForm.invalid">Se connecter</button>
 </form>

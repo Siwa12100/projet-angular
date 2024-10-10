@@ -1,32 +1,36 @@
 import { Component, } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { LocalStorageService } from '../../../../services/local-storage.service';
 import { AuthentificationService } from '../../../../services/authentification.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login-form.component.html'
 })
 export class LoginFormComponent {
   loginForm: FormGroup;
+  submitError : boolean;
 
   constructor(private fb: FormBuilder, 
-            protected localStorage : LocalStorageService, 
             protected authService : AuthentificationService
         ) {
     this.loginForm = new FormGroup({
         login: new FormControl('', Validators.required),
         password: new FormControl('', Validators.required),
     });
+    this.submitError = false;
   }
 
   onSubmit() {
-
-    if (this.loginForm.valid) {
-        this.localStorage.saveData('username', this.loginForm.value['login']);
+    if (this.authService.login(this.loginForm.value['login'], this.loginForm.value['password'])) {
+      this.submitError = false
+      
     }
-    this.authService.login(this.loginForm.value['login'], this.loginForm.value['password'])
+    else{
+      this.submitError = true
+      return; 
+    }
   }
 }

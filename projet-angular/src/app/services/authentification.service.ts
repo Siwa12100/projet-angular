@@ -18,9 +18,12 @@ export class AuthentificationService {
     }
   }
 
-  login(login : string, password: string){
+  login(login : string, password: string) : boolean {
     if(login == password){
+        this.localStorage.saveData('username', login);
         this.router.navigate(['/'])
+        return true;
     }
+    return false;
   }
 }
