@@ -21,6 +21,8 @@ export class ListeJoueursComponent implements OnInit {
     this.authService.onInit()
     this.joueursService.recupererJoueurs().subscribe(data => {
       this.joueurs = data;
-    })
+    });
+
+    console.log(this.joueursService.recupererLogins())
   }
 }
