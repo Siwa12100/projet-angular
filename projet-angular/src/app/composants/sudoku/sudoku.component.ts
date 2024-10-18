@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import { SudokuService } from '../../services/suduko.service';
 import { CommonModule } from '@angular/common';
-import { MatInputModule } from '@angular/material/input';
-import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: 'app-navbar',
     standalone: true,
-    imports: [CommonModule, MatInputModule, MatTableModule, MatButtonModule],
+    imports: [CommonModule, MatButtonModule],
     templateUrl: './sudoku.component.html',
     styleUrl: './sudoku.component.css'
 })
@@ -18,18 +16,40 @@ export class SudokuComponent {
     originalGrid: number[][] = [];
     cluesUsed: number = 0;
     displayedColumns : String[] = [];
+    isDisplayed : boolean = false;
+    chooseDifficulty : boolean = true;
 
     constructor(protected sudokuService: SudokuService) {}
 
     ngOnInit(): void {
-        this.displayedColumns = this.userGrid.map((_, index) => `col${index}`);
+        
+    }
 
-        this.sudokuService.getSudoku().subscribe((response: any) => {
-            this.userGrid = response.easy;
-            this.originalGrid = response.easy;
-            this.solutionGrid = response.data;
-            localStorage.setItem('sudoku', JSON.stringify(response));
-        });
+    showGrid(difficulty : any ){
+        this.chooseDifficulty = false;
+        this.displayedColumns = this.userGrid.map((_, index) => `col${index}`);
+        if(localStorage.getItem('sudoku_key') != "true"){
+            localStorage.setItem('sudoku_key', 'false')
+            this.isDisplayed = true;
+            if(localStorage.getItem('sudoku') == null){
+                this.sudokuService.getSudoku().subscribe((response: any) => {
+                    this.userGrid = response[difficulty];
+                    this.originalGrid = response[difficulty];
+                    this.solutionGrid = response[difficulty];
+                    localStorage.setItem('sudoku', JSON.stringify(response));
+                });
+            }
+            else{
+                const data = JSON.parse(localStorage.getItem('sudoku')!);
+                this.userGrid = data![difficulty];
+                this.originalGrid = data![difficulty];
+                this.solutionGrid = data!.data;
+            }
+        }
+        else{
+            alert('You have already completed this sudoku!');
+            this.isDisplayed = false;
+        }
     }
 
     onCellInput(row: number, col: number, event: KeyboardEvent): void {
@@ -64,7 +84,7 @@ export class SudokuComponent {
     }
 
     submitGrid(): void {
-        let isCorrect = true; // Flag pour vérifier si la grille est correcte
+        let isCorrect = true; // Flag si grille correcte
 
         for (let i = 0; i < this.userGrid.length; i++) {
             for (let j = 0; j < this.userGrid[i].length; j++) {
@@ -76,10 +96,17 @@ export class SudokuComponent {
 
         if (isCorrect) {
             this.sudokuService.sendResult(this.cluesUsed);
+            localStorage.setItem('sudoku_key', "true");
             console.log('Grille validée avec succès !');
         } else {
             this.checkGrid();
             console.log('La grille contient des erreurs. Indices incrémentés.');
         }
+    }
+
+    replay(){
+        localStorage.setItem('sudoku_key', 'false')
+        this.chooseDifficulty = false;
+        window.location.reload();
     }
 }

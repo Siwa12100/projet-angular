@@ -14,15 +14,6 @@ export class AuthentificationService {
     protected joueursService: JoueursService,
   ) {}
 
-
-  onInit() {
-    if (!this.localStorage.getData('username')) {
-      this.router.navigate(['/login']);
-    } else {
-      this.router.navigate(['/']);
-    }
-  }
-
   login(login: string, password: string): boolean {
     if (login !== password) {
       console.log("mdp et login different....");
