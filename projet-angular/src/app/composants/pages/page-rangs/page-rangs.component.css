@@ -1,0 +1,13 @@
+.tableaux {
+    /* border : 3px solid red; */
+    display: flex;
+    flex-direction: row;
+    align-items : center;
+    justify-content:  space-around;
+
+}
+
+.tableau {
+
+    /* border : 3px solid green; */
+}

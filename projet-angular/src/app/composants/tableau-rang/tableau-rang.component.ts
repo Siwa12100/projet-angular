@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -23,7 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './tableau-rang.component.html',
   styleUrls: ['./tableau-rang.component.css']
 })
-export class TableauRangSerieComponent implements OnInit, OnChanges {
+export class TableauRangSerieComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Input() joueursDictionnaire: { [pseudo: string]: number } = {};
   @Input() colonneTitre: string = 'Valeur';
@@ -34,15 +34,31 @@ export class TableauRangSerieComponent implements OnInit, OnChanges {
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
-    this.donneesDuTableau.paginator = this.paginator;
-    this.donneesDuTableau.sort = this.sort;
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['joueursDictionnaire'] && this.joueursDictionnaire) {
       const joueursPaire = Object.entries(this.joueursDictionnaire).map(([pseudo, valeur]) => ({ pseudo, valeur }));
-      this.donneesDuTableau.data = joueursPaire.sort((a, b) => b.valeur - a.valeur);
+      this.donneesDuTableau.data = joueursPaire;
     }
+  }
+
+  ngAfterViewInit(): void {
+
+    this.donneesDuTableau.paginator = this.paginator;
+    this.donneesDuTableau.sort = this.sort;
+
+    this.donneesDuTableau.sortingDataAccessor = (item, property) => {
+      if (property === 'pseudo') {
+        return item.pseudo.toLowerCase();
+      } else if (property === 'valeur') {
+        return item.valeur;
+      }
+      return '';
+    };
+
+    this.sort.sort({ id: 'valeur', start: 'desc', disableClear: true });
   }
 
   appliquerUnFiltre(event: Event): void {

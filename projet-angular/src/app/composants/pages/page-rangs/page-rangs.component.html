@@ -1,3 +1,12 @@
 <h2>Page des rangs</h2>
 
-<app-tableau-rang [joueursDictionnaire]="joueursDictionnaire" [colonneTitre]="'Série'"></app-tableau-rang>
+<div class="tableaux">
+    <div class="tableau">
+        <app-tableau-rang [joueursDictionnaire]="joueursSerieDictionnaire" [colonneTitre]="'Série'"></app-tableau-rang>
+    </div>
+
+    <div class="tableau">
+        <app-tableau-rang [joueursDictionnaire]="joueursPointsDictionnaire" [colonneTitre]="'Points'"></app-tableau-rang>
+    </div>
+</div>
+

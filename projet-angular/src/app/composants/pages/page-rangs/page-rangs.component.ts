@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TableauRangSerieComponent } from '../../tableau-rang/tableau-rang.component';
 import { JoueursService } from '../../../services/joueurs.service';
+import { TableauRangSerieComponent } from '../../tableau-rang/tableau-rang.component';
 
 @Component({
   selector: 'app-page-rangs',
@@ -11,18 +11,24 @@ import { JoueursService } from '../../../services/joueurs.service';
 })
 export class PageRangsComponent implements OnInit {
 
-  joueursDictionnaire: { [pseudo: string]: number } = {};
+  joueursSerieDictionnaire: { [pseudo: string]: number } = {};
+  joueursPointsDictionnaire: { [pseudo: string]: number } = {};
 
   constructor(private joueursService: JoueursService) {}
 
   ngOnInit(): void {
     this.joueursService.recupererJoueurs().subscribe(joueurs => {
 
-        this.joueursDictionnaire = joueurs.reduce((paire, joueur) => {
-        paire[joueur.login] = parseInt(joueur.streak);
+      this.joueursSerieDictionnaire = joueurs.reduce((paire, joueur) => {
+        paire[joueur.login] = parseInt(joueur.streak, 10);
         return paire;
       }, {} as { [pseudo: string]: number });
+
+      this.joueursPointsDictionnaire = joueurs.reduce((paire, joueur) => {
+        paire[joueur.login] = parseInt(joueur.points, 10);
+        return paire;
+      }, {} as { [pseudo: string]: number });
+
     });
   }
 }
-
