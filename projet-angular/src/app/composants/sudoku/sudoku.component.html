@@ -1,7 +1,7 @@
 <div *ngIf="chooseDifficulty">
-  <button (click)="showGrid('easy')">Facile</button>
-  <button (click)="showGrid('medium')">Normal</button>
-  <button (click)="showGrid('hard')">Difficile</button>
+  <button mat-raised-button (click)="showGrid('easy')">Facile</button>
+  <button mat-raised-button (click)="showGrid('medium')">Normal</button>
+  <button mat-raised-button (click)="showGrid('hard')">Difficile</button>
 </div>
 
 <div class="sudoku-grid">
