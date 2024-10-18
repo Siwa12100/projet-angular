@@ -1,0 +1,29 @@
+ul {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+  }
+  
+  li {
+    flex: 1;
+    text-align: center;
+  }
+  
+  a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 1.3vw;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+ 
+  a[disabled] {
+    pointer-events: none;
+  }

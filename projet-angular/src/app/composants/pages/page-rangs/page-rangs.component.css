@@ -1,13 +1,31 @@
 .tableaux {
-    /* border : 3px solid red; */
+
     display: flex;
     flex-direction: row;
     align-items : center;
     justify-content:  space-around;
+    margin-top: 3vw;
 
 }
 
-.tableau {
+.classement {
 
-    /* border : 3px solid green; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start
+}
+
+.page {
+    margin:  3vw;
+}
+
+h2 {
+    color : black;
+    font-weight: 600;
+}
+
+h3 {
+    color: black;
+    font-weight: 300;
 }

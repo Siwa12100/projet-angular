@@ -9,6 +9,7 @@ import { NavbarComponent } from '../partial/navbar/navbar.component';
   standalone: true,
   imports: [RouterOutlet, CommonModule, RouterLink, RouterLinkActive, ReactiveFormsModule, NavbarComponent],
   templateUrl: './app.component.html',
+  styleUrl : './app.component.css',
 })
 export class AppComponent {
   title = 'projet-angular';

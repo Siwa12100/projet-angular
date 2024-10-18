@@ -1,14 +1,21 @@
-<h2>Page des rangs</h2>
+<div class="page">
+    <h2>Page des rangs</h2>
 
 <div class="tableaux">
-    <div class="tableau">
+    <div class="classement">
         <h3>Classement par série</h3>
-        <app-tableau-rang [joueursDictionnaire]="joueursSerieDictionnaire" [colonneTitre]="'Série'"></app-tableau-rang>
+        <div class="tableau">
+            <app-tableau-rang [joueursDictionnaire]="joueursSerieDictionnaire" [colonneTitre]="'Série'"></app-tableau-rang>
+        </div>
     </div>
 
-    <div class="tableau">
+    <div class="classement">
         <h3>Classement par points</h3>
+        <div class="tableau">
         <app-tableau-rang [joueursDictionnaire]="joueursPointsDictionnaire" [colonneTitre]="'Points'"></app-tableau-rang>
+        </div>
     </div>
 </div>
 
+
+</div>

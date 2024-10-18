@@ -6,7 +6,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   selector: 'app-navbar-menu',
   standalone: true,
   imports: [RouterOutlet, RouterLink, RouterLinkActive,],
-  templateUrl: './menu.component.html'
+  templateUrl: './menu.component.html',
+  styleUrl : './menu.component.css'
 })
 export class NavbarMenuComponent {
   constructor(protected authService : AuthentificationService
