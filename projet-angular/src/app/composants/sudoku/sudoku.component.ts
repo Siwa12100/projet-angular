@@ -16,21 +16,35 @@ export class SudokuComponent {
     originalGrid: number[][] = [];
     cluesUsed: number = 0;
     displayedColumns : String[] = [];
-    isDisplayed : boolean = true;
+    isDisplayed : boolean = false;
+    chooseDifficulty : boolean = true;
 
     constructor(protected sudokuService: SudokuService) {}
 
     ngOnInit(): void {
+        
+    }
+
+    showGrid(difficulty : any ){
+        this.chooseDifficulty = false;
         this.displayedColumns = this.userGrid.map((_, index) => `col${index}`);
         if(localStorage.getItem('sudoku_key') != "true"){
             localStorage.setItem('sudoku_key', 'false')
             this.isDisplayed = true;
-            this.sudokuService.getSudoku().subscribe((response: any) => {
-                this.userGrid = response.easy;
-                this.originalGrid = response.easy;
-                this.solutionGrid = response.data;
-                localStorage.setItem('sudoku', JSON.stringify(response));
-            });
+            if(localStorage.getItem('sudoku') == null){
+                this.sudokuService.getSudoku().subscribe((response: any) => {
+                    this.userGrid = response[difficulty];
+                    this.originalGrid = response[difficulty];
+                    this.solutionGrid = response[difficulty];
+                    localStorage.setItem('sudoku', JSON.stringify(response));
+                });
+            }
+            else{
+                const data = JSON.parse(localStorage.getItem('sudoku')!);
+                this.userGrid = data![difficulty];
+                this.originalGrid = data![difficulty];
+                this.solutionGrid = data!.data;
+            }
         }
         else{
             alert('You have already completed this sudoku!');
@@ -70,7 +84,7 @@ export class SudokuComponent {
     }
 
     submitGrid(): void {
-        let isCorrect = true; // Flag pour vérifier si la grille est correcte
+        let isCorrect = true; // Flag si grille correcte
 
         for (let i = 0; i < this.userGrid.length; i++) {
             for (let j = 0; j < this.userGrid[i].length; j++) {
@@ -92,7 +106,7 @@ export class SudokuComponent {
 
     replay(){
         localStorage.setItem('sudoku_key', 'false')
+        this.chooseDifficulty = false;
         window.location.reload();
-        this.isDisplayed = true;
     }
 }
