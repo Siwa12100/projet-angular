@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarMenuComponent } from "./menu/menu.component";
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { Router } from '@angular/router';
+import { AuthentificationService } from '../../../services/authentification.service';
 
 @Component({
     selector: 'app-navbar',
@@ -10,15 +11,23 @@ import { Router } from '@angular/router';
     templateUrl: './navbar.component.html', 
     styleUrl : './navbar.component.css'
   })
-  export class NavbarComponent{
+  export class NavbarComponent implements OnInit {
     pseudo : string | null;
 
-    constructor(protected localstorage : LocalStorageService, protected router : Router) {
-      this.pseudo = localStorage.getItem('username');
+    constructor(
+      protected router : Router,
+      protected authentificationService : AuthentificationService) {
+
+      this.pseudo = this.authentificationService.recupererPseudoJoueurConnecte();
     }
 
-    logout(){
-      this.localstorage.removeData('username');
-      this.router.navigate(['/login']);
+    ngOnInit(): void {
+        this.pseudo = this.authentificationService.recupererPseudoJoueurConnecte();
     }
+
+    deconnexion() : void {
+      this.authentificationService.logout();
+      this.pseudo = null;
+    }
+    
   }

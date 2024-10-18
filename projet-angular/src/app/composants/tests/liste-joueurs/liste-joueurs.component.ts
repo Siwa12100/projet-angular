@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Joueur } from '../../../modeles/joueur';
 import { AuthentificationService } from '../../../services/authentification.service';
 import { JoueurComponent } from '../joueur/joueur.component';
+import { NavbarComponent } from '../../partial/navbar/navbar.component';
 
 @Component({
   selector: 'app-liste-joueurs',

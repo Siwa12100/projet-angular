@@ -1,11 +1,12 @@
 .navbar {
 
     background-color:  black;
+    color : white;
     height: 5vw;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
 
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
