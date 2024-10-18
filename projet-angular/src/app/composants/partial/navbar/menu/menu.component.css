@@ -13,7 +13,7 @@ ul {
 li {
   flex: 1;
   text-align: center;
-  position: relative; /* Important pour le positionnement du dropdown */
+  position: relative;
 }
 
 a {
@@ -34,21 +34,25 @@ a:hover {
   cursor: pointer;
 }
 
-/* Styles pour le dropdown */
+
+
 .dropdown-content {
-  display: none; /* Cache le menu déroulant par défaut */
+  display: none;
   position: absolute;
-  background-color: #333;
+  background-color: black;
+  border-radius: 15px;
   min-width: 160px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
   list-style: none;
   padding: 0;
   margin: 0;
+  padding-top: 10px;
+  padding-bottom: 10px; 
 }
 
 .dropdown-content li {
-  text-align: left; /* Alignement des éléments dans le sous-menu */
+  text-align: left;
 }
 
 .dropdown-content a {
@@ -60,10 +64,17 @@ a:hover {
 }
 
 .dropdown-content a:hover {
-  background-color: #555; /* Fond légèrement plus clair au survol */
+  background-color: rgb(157, 157, 255);
 }
 
-/* Affiche le dropdown au survol du parent */
 .dropdown:hover .dropdown-content {
   display: block;
+  height: auto;
+}
+
+.dropdown-arrow::after {
+  content: '\25BC'; /* Unicode pour la flèche vers le bas */
+  margin-left: 0.5vw;
+  font-size: 0.8em;
+  color: white; /* Couleur de la flèche */
 }
