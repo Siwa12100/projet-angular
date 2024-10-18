@@ -1,8 +1,9 @@
-export interface joueur {
+import { Streak } from './streak';
 
-    id : number;
-    login : string;
-    streak : number;
-    steaks : number[];
-    points : number;
+export interface Joueur {
+  login: string;
+  streak: string;
+  points: string;
+  streaks: Streak[];
+  id: string;
 }

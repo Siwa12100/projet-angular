@@ -1,0 +1,10 @@
+<h3>Liste des joueurs :</h3>
+
+@if (this.joueurs.length > 0) {
+    @for(joueur of this.joueurs; track $index) {
+        <app-joueur [joueur]="joueur"></app-joueur>
+    }
+}
+@else {
+    <p>Aucun joueur trouvé.</p>
+}

@@ -1,0 +1,22 @@
+.joueur-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .joueur-container h4 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .joueur-container ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .joueur-container li {
+    margin: 5px 0;
+  }
+  
