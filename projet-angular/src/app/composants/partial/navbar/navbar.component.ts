@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavbarMenuComponent } from "./menu/menu.component";
+import { LocalStorageService } from '../../../services/local-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-navbar',
@@ -8,5 +10,14 @@ import { NavbarMenuComponent } from "./menu/menu.component";
     templateUrl: './navbar.component.html'
   })
   export class NavbarComponent{
-    constructor() {}
+    pseudo : string | null;
+
+    constructor(protected localstorage : LocalStorageService, protected router : Router) {
+      this.pseudo = localStorage.getItem('username');
+    }
+
+    logout(){
+      this.localstorage.removeData('username');
+      this.router.navigate(['/login']);
+    }
   }
