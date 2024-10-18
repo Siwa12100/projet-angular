@@ -1,0 +1,35 @@
+import { Component, OnInit } from '@angular/core';
+import { JoueursService } from '../../../services/joueurs.service';
+import { Observable } from 'rxjs';
+import { Joueur } from '../../../modeles/joueur';
+import { AuthentificationService } from '../../../services/authentification.service';
+import { JoueurComponent } from '../joueur/joueur.component';
+
+@Component({
+  selector: 'app-liste-joueurs',
+  standalone: true,
+  imports: [JoueurComponent],  // Ajout de l'import du composant Joueur
+  templateUrl: './liste-joueurs.component.html',
+  styleUrls: ['./liste-joueurs.component.css']
+})
+export class ListeJoueursComponent implements OnInit {
+
+  protected joueurs: Joueur[] = [];
+
+  constructor(
+    protected joueursService: JoueursService,
+    protected authService: AuthentificationService
+  ) {
+
+    this.joueursService.recupererLogins().subscribe(data => {
+      data.forEach(login => console.log("- " + login))
+    })
+  }
+
+  ngOnInit(): void {
+    this.authService.onInit();
+    this.joueursService.recupererJoueurs().subscribe(data => {
+      this.joueurs = data;
+    });
+  }
+}

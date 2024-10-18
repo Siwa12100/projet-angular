@@ -1,0 +1,13 @@
+<div class="joueur-container">
+    <h4>{{ joueur.login }}</h4>
+    <p>Streak: {{ joueur.streak }}</p>
+    <p>Points: {{ joueur.points }}</p>
+    <ul>
+        @for (streak of this.joueur.streaks; track $index) {
+            <li>
+        {{ streak.day }} : {{ streak.isPlayed ? '✔' : '✖' }}
+            </li>
+        }
+    </ul>
+  </div>
+  
