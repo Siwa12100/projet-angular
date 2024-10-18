@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { JoueursService } from '../../../services/joueurs.service';
-import { Observable } from 'rxjs';
 import { Joueur } from '../../../modeles/joueur';
 import { AuthentificationService } from '../../../services/authentification.service';
 import { JoueurComponent } from '../joueur/joueur.component';
@@ -22,7 +21,6 @@ export class ListeJoueursComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.onInit();
     this.joueursService.recupererJoueurs().subscribe(data => {
       this.joueurs = data;
     });

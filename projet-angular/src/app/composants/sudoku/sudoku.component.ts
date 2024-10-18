@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import { SudokuService } from '../../services/suduko.service';
 import { CommonModule } from '@angular/common';
-import { MatInputModule } from '@angular/material/input';
-import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: 'app-navbar',
     standalone: true,
-    imports: [CommonModule, MatInputModule, MatTableModule, MatButtonModule],
+    imports: [CommonModule, MatButtonModule],
     templateUrl: './sudoku.component.html',
     styleUrl: './sudoku.component.css'
 })
