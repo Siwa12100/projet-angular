@@ -29,3 +29,36 @@ h3 {
     color: black;
     font-weight: 300;
 }
+
+.styled-select {
+    appearance: none;
+    background-color: #79b8ec;
+    color: white;
+    padding: 0.6vw 1vw;
+    font-size: 16px;
+    border: 2px solid rgb(0, 25, 63);
+    border-radius: 8px;
+    width: 12%;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.styled-select::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    padding: 5px;
+    transform: rotate(45deg);
+}
+
+
+.styled-select option {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    font-size: 16px;
+}
