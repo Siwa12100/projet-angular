@@ -1,25 +1,32 @@
 import { Component } from '@angular/core';
 import { SudokuService } from '../../services/suduko.service';
 import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: 'app-navbar',
     standalone: true,
-    imports: [CommonModule],
-    templateUrl: './sudoku.component.html'
+    imports: [CommonModule, MatInputModule, MatTableModule, MatButtonModule],
+    templateUrl: './sudoku.component.html',
+    styleUrl: './sudoku.component.css'
 })
 export class SudokuComponent {
     solutionGrid: number[][] = [];
     userGrid: number[][] = [];
     originalGrid: number[][] = [];
     cluesUsed: number = 0;
+    displayedColumns : String[] = [];
 
     constructor(protected sudokuService: SudokuService) {}
 
     ngOnInit(): void {
+        this.displayedColumns = this.userGrid.map((_, index) => `col${index}`);
+
         this.sudokuService.getSudoku().subscribe((response: any) => {
-            this.userGrid = response.data;
-            this.originalGrid = response.data;
+            this.userGrid = response.easy;
+            this.originalGrid = response.easy;
             this.solutionGrid = response.data;
             localStorage.setItem('sudoku', JSON.stringify(response));
         });
@@ -71,7 +78,7 @@ export class SudokuComponent {
             this.sudokuService.sendResult(this.cluesUsed);
             console.log('Grille validée avec succès !');
         } else {
-            this.cluesUsed += 1;
+            this.checkGrid();
             console.log('La grille contient des erreurs. Indices incrémentés.');
         }
     }
