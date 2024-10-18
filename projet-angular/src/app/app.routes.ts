@@ -4,9 +4,10 @@ import { LoginComponent } from './composants/authentification/login/login.compon
 import { SudokuComponent } from './composants/sudoku/sudoku.component';
 import { PageRangsComponent } from './composants/pages/page-rangs/page-rangs.component';
 import { AuthGuard } from './guard/auth.guard';
+import { HomeComponent } from './composants/pages/home/home.component';
 
 export const routes: Routes = [
-  {path: '', component: ListeJoueursComponent, canActivate: [AuthGuard]},
+  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent },
   {path: "joueurs", component: ListeJoueursComponent, canActivate: [AuthGuard]},
   {path: "sudoku", component: SudokuComponent, canActivate: [AuthGuard]},
