@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RedirectCommand, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { LocalStorageService } from './local-storage.service';
 import { JoueursService } from './joueurs.service';
 
@@ -8,38 +8,39 @@ import { JoueursService } from './joueurs.service';
 })
 export class AuthentificationService {
 
-  constructor(protected router: Router, protected localStorage : LocalStorageService, protected joueursService : JoueursService) { }
+  constructor(
+    protected router: Router,
+    protected localStorage: LocalStorageService,
+    protected joueursService: JoueursService
+  ) {}
 
-  onInit(){
-    if(!this.localStorage.getData('username')){
-        this.router.navigate(['/login'])
-    }
-    else{
-        this.router.navigate(['/'])
+
+  onInit() {
+    if (!this.localStorage.getData('username')) {
+      this.router.navigate(['/login']);
+    } else {
+      this.router.navigate(['/']);
     }
   }
 
-  login(login : string, password: string) : boolean {
-    console.log(login)
-    // if (this.verifyIntegrityOfPlayer(login)){
-      if(login == password){
-        this.localStorage.saveData('username', login);
-        this.router.navigate(['/'])
-        return true;
-      }
+  login(login: string, password: string): boolean {
+    if (login !== password) {
+      console.log("mdp et login different....");
       return false;
-    // }
-    return false;
-  }
+    }
 
-  // Verification login par l'API des joueurs
-  // verifyIntegrityOfPlayer(login : string) : boolean {
-  //   const logins = this.joueursService.recupererLogins();
-  //   console.log(logins[0]);
-  //   for (let e of logins){
-  //     console.log(e === login)
-  //   }
-  //   console.log("Wallah");
-  //   return logins.some(e => e.trim().toLowerCase() === login.trim().toLowerCase());
-  // }
+    this.joueursService.recupererLogins().subscribe(loginsExistants => {
+      const loginExiste = loginsExistants.includes(login); 
+      if (!loginExiste) {
+        console.log("le login existe pas....");
+        return false;
+      }
+
+      this.localStorage.saveData('username', login);
+      this.router.navigate(['/']);
+      return true;
+    });
+
+    return true;
+  }
 }

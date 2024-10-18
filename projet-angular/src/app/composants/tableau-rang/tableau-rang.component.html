@@ -1,0 +1,27 @@
+<div class="table-container">
+  <div class="filter-section">
+    <mat-form-field appearance="outline">
+      <mat-label>Rechercher un joueur</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput (keyup)="appliquerUnFiltre($event)" placeholder="Entrez un login">
+    </mat-form-field>
+  </div>
+
+  <table mat-table [dataSource]="donneesDuTableau" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="pseudo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Joueur </th>
+      <td mat-cell *matCellDef="let joueur"> {{joueur.pseudo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="valeur">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ colonneTitre }} </th>
+      <td mat-cell *matCellDef="let joueur"> {{joueur.valeur}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

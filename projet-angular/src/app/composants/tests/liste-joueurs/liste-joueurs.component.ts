@@ -19,12 +19,7 @@ export class ListeJoueursComponent implements OnInit {
   constructor(
     protected joueursService: JoueursService,
     protected authService: AuthentificationService
-  ) {
-
-    this.joueursService.recupererLogins().subscribe(data => {
-      data.forEach(login => console.log("- " + login))
-    })
-  }
+  ) {}
 
   ngOnInit(): void {
     this.authService.onInit();
