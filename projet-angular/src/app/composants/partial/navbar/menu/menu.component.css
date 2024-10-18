@@ -1,29 +1,69 @@
 ul {
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    height: 100%;
-  }
-  
-  li {
-    flex: 1;
-    text-align: center;
-  }
-  
-  a {
-    display: block;
-    color: white;
-    text-decoration: none;
-    font-size: 1.3vw;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
- 
-  a[disabled] {
-    pointer-events: none;
-  }
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+li {
+  flex: 1;
+  text-align: center;
+  position: relative; /* Important pour le positionnement du dropdown */
+}
+
+a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  font-size: 1.3vw;
+  padding: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a[disabled] {
+  pointer-events: none;
+}
+
+a:hover {
+  color: rgb(157, 157, 255); 
+  cursor: pointer;
+}
+
+/* Styles pour le dropdown */
+.dropdown-content {
+  display: none; /* Cache le menu déroulant par défaut */
+  position: absolute;
+  background-color: #333;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-content li {
+  text-align: left; /* Alignement des éléments dans le sous-menu */
+}
+
+.dropdown-content a {
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #555; /* Fond légèrement plus clair au survol */
+}
+
+/* Affiche le dropdown au survol du parent */
+.dropdown:hover .dropdown-content {
+  display: block;
+}

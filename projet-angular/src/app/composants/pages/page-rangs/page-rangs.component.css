@@ -32,7 +32,7 @@ h3 {
 
 .styled-select {
     appearance: none;
-    background-color: #79b8ec;
+    background-color: rgb(157, 157, 255);
     color: white;
     padding: 0.6vw 1vw;
     font-size: 16px;

@@ -2,13 +2,14 @@
     <li>
         <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a>
     </li>
-    <li>
-        <a routerLink="/sudoku" ariaCurrentWhenActive="page">Sudoku</a>
+    <li class="dropdown">
+        <a href="#" ariaCurrentWhenActive="page">Jeux</a>
+        <ul class="dropdown-content">
+            <li><a routerLink="/sudoku" ariaCurrentWhenActive="page">Sudoku</a></li>
+            <li><a routerLink="/mots-croises" ariaCurrentWhenActive="page">Mots croisés</a></li>
+        </ul>
     </li>
     <li>
         <a routerLink="/rangs" ariaCurrentWhenActive="page">Rangs</a>
-    </li>
-    <li>
-        <a routerLink="/mot-croise" [attr.disabled]="true">Mot croisé</a>
     </li>
 </ul>
