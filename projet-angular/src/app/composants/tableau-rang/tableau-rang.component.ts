@@ -27,20 +27,30 @@ export class TableauRangSerieComponent implements OnInit, OnChanges, AfterViewIn
 
   @Input() joueursDictionnaire: { [pseudo: string]: number } = {};
   @Input() colonneTitre: string = 'Valeur';
-  displayedColumns: string[] = ['pseudo', 'valeur'];
-  donneesDuTableau = new MatTableDataSource<{ pseudo: string, valeur: number }>();
+  displayedColumns: string[] = ['classement', 'pseudo', 'valeur'];
+  donneesDuTableau = new MatTableDataSource<{ pseudo: string, valeur: number, classementInitial: number }>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  ngOnInit(): void {
+  joueursClassement: { pseudo: string, valeur: number, classementInitial: number }[] = [];
 
-  }
+  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
+
     if (changes['joueursDictionnaire'] && this.joueursDictionnaire) {
-      const joueursPaire = Object.entries(this.joueursDictionnaire).map(([pseudo, valeur]) => ({ pseudo, valeur }));
-      this.donneesDuTableau.data = joueursPaire;
+
+      const joueursPaire = Object.entries(this.joueursDictionnaire)
+        .map(([pseudo, valeur]) => ({ pseudo, valeur }))
+        .sort((a, b) => b.valeur - a.valeur)
+        .map((joueur, index) => ({
+          ...joueur,
+          classementInitial: index + 1
+        }));
+
+      this.joueursClassement = joueursPaire;
+      this.donneesDuTableau.data = [...joueursPaire];
     }
   }
 
@@ -50,9 +60,12 @@ export class TableauRangSerieComponent implements OnInit, OnChanges, AfterViewIn
     this.donneesDuTableau.sort = this.sort;
 
     this.donneesDuTableau.sortingDataAccessor = (item, property) => {
+
       if (property === 'pseudo') {
+
         return item.pseudo.toLowerCase();
       } else if (property === 'valeur') {
+
         return item.valeur;
       }
       return '';
@@ -62,11 +75,16 @@ export class TableauRangSerieComponent implements OnInit, OnChanges, AfterViewIn
   }
 
   appliquerUnFiltre(event: Event): void {
+
     const filtreDesValeurs = (event.target as HTMLInputElement).value;
     this.donneesDuTableau.filter = filtreDesValeurs.trim().toLowerCase();
 
     if (this.donneesDuTableau.paginator) {
       this.donneesDuTableau.paginator.firstPage();
     }
+  }
+
+  compare(a: number | string, b: number | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 }
