@@ -1,0 +1,14 @@
+<ul>
+    <li>
+        <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a>
+    </li>
+    <li>
+        <a routerLink="/sudoku" ariaCurrentWhenActive="page">Sudoku</a>
+    </li>
+    <li>
+        <a routerLink="/leaderboard" ariaCurrentWhenActive="page">Leaderboard</a>
+    </li>
+    <li>
+        <a routerLink="/leaderboard" [attr.disabled]="true" ariaCurrentWhenActive="page">Mot croisé</a>
+    </li>
+</ul>
