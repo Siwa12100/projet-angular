@@ -11,7 +11,7 @@ export class AuthentificationService {
   constructor(
     protected router: Router,
     protected localStorage: LocalStorageService,
-    protected joueursService: JoueursService
+    protected joueursService: JoueursService,
   ) {}
 
   login(login: string, password: string): boolean {
@@ -29,9 +29,19 @@ export class AuthentificationService {
 
       this.localStorage.saveData('username', login);
       this.router.navigate(['/']);
+      
       return true;
     });
 
     return true;
+  }
+
+  logout() : void {
+    this.localStorage.removeData('username');
+    this.router.navigate(['/login']);
+  }
+
+  recupererPseudoJoueurConnecte() : string | null {
+    return this.localStorage.getData("username");
   }
 }

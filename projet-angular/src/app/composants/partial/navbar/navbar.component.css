@@ -1,17 +1,70 @@
 .navbar {
 
     background-color:  black;
+    color : white;
     height: 5vw;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 
 
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
 }
 
 .menu {
-    width: 45%;
+    width: 30%;
     height: 100%;
+
+}
+
+.partie-gauche {
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.partie-gauche p {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.7vw;
+}
+
+p strong {
+
+    color : rgb(157, 157, 255);
+    margin-left: 0.5vw;
+    font-size: 1.4vw;
+}
+
+.partie-droite, .partie-gauche {
+
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.partie-droite button {
+    background-color: black;
+    font-size: 1.3vw;
+    color: white;
+    border: 2px solid white;
+    padding: 0.6vw;
+    border-radius: 14px;
+
+    /* Ajoute une transition fluide pour la couleur du texte et la bordure */
+    transition: color 0.3s ease, border-color 0.3s ease; 
+}
+
+.partie-droite button:hover, a:hover {
+    color: rgb(157, 157, 255); /* Changement de la couleur du texte au survol */
+    border: 2px solid rgb(157, 157, 255);
+    cursor: pointer;
 }

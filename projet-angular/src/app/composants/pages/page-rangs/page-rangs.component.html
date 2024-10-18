@@ -1,21 +1,24 @@
 <div class="page">
     <h2>Page des rangs</h2>
 
-<div class="tableaux">
-    <div class="classement">
-        <h3>Classement par série</h3>
-        <div class="tableau">
-            <app-tableau-rang [joueursDictionnaire]="joueursSerieDictionnaire" [colonneTitre]="'Série'"></app-tableau-rang>
+    <select class="styled-select">
+        <option>Sudoku</option>
+        <option>Mots croisés</option>
+    </select>
+
+    <div class="tableaux">
+        <div class="classement">
+            <h3>Classement par série</h3>
+            <div class="tableau">
+                <app-tableau-rang [joueursDictionnaire]="joueursSerieDictionnaire" [colonneTitre]="'Série'"></app-tableau-rang>
+            </div>
+        </div>
+
+        <div class="classement">
+            <h3>Classement par points</h3>
+            <div class="tableau">
+            <app-tableau-rang [joueursDictionnaire]="joueursPointsDictionnaire" [colonneTitre]="'Points'"></app-tableau-rang>
+            </div>
         </div>
     </div>
-
-    <div class="classement">
-        <h3>Classement par points</h3>
-        <div class="tableau">
-        <app-tableau-rang [joueursDictionnaire]="joueursPointsDictionnaire" [colonneTitre]="'Points'"></app-tableau-rang>
-        </div>
-    </div>
-</div>
-
-
 </div>

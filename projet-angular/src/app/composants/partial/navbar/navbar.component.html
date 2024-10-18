@@ -1,6 +1,21 @@
 <div class="navbar">
+    
+    <div class="partie-gauche">
+        @if (this.pseudo != null) {
+            <p>Joueur connecté : <strong>{{this.pseudo}}</strong></p>
+        }
+        @else {
+            <p>Connectez-vous</p>
+        }
+    </div>
+    
     <div class="menu">
         <app-navbar-menu></app-navbar-menu>
-        <button (click)="logout()">{{ pseudo }}</button>
     </div>
+    
+    <div class="partie-droite">
+        @if(this.pseudo != null) {
+            <button (click)="deconnexion()">Se déconnecter</button>
+        }
     </div>
+</div>
