@@ -33,13 +33,13 @@ export class AuthentificationService {
   }
 
   // Verification login par l'API des joueurs
-  verifyIntegrityOfPlayer(login : string) : boolean {
-    const logins = this.joueursService.recupererLogins();
-    console.log(logins[0]);
-    for (let e of logins){
-      console.log(e === login)
-    }
-    console.log("Wallah");
-    return logins.some(e => e.trim().toLowerCase() === login.trim().toLowerCase());
-  }
+  // verifyIntegrityOfPlayer(login : string) : boolean {
+  //   const logins = this.joueursService.recupererLogins();
+  //   console.log(logins[0]);
+  //   for (let e of logins){
+  //     console.log(e === login)
+  //   }
+  //   console.log("Wallah");
+  //   return logins.some(e => e.trim().toLowerCase() === login.trim().toLowerCase());
+  // }
 }

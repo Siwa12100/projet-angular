@@ -1,0 +1,15 @@
+<div class="sudoku-grid">
+    <table>
+      <tr *ngFor="let row of userGrid; let i = index">
+        <td *ngFor="let cell of row; let j = index">
+            <input [value]="cell === 0 ? '' : cell" 
+                   [disabled]="originalGrid[i][j] !== 0" 
+                   (keydown)="onCellInput(i, j, $event)" />
+        </td>
+      </tr>
+    </table>
+</div>
+
+<button (click)="checkGrid()">Vérifier</button>
+<p>Indices utilisés : {{ cluesUsed }}</p>
+<button (click)="submitGrid()">Soumettre</button>
