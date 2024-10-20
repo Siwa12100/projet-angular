@@ -6,7 +6,8 @@ import { LoginFormComponent } from './login-form/login-form.component';
     selector: 'app-login',
     standalone: true,
     imports: [LoginFormComponent],
-    templateUrl: './login.component.html'
+    templateUrl: './login.component.html',
+    styleUrl : './login.component.css'
   })
   export class LoginComponent implements OnInit {
     constructor(protected localStorage : LocalStorageService) {}
