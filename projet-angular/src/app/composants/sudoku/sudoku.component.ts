@@ -110,6 +110,8 @@ export class SudokuComponent {
         if (isCorrect) {
             this.sudokuService.sendResult(this.cluesUsed);
             localStorage.setItem('sudoku_key', "true");
+            this.isDisplayed = false;
+            this.chooseDifficulty = false;
         } 
         // Sinon, on lance la fonction checkGrid() qui va incrémenter le score de vérification
         else {
@@ -120,7 +122,7 @@ export class SudokuComponent {
     // Fonction pour rejouer la partie
     replay(){
         localStorage.setItem('sudoku_key', 'false')
-        this.chooseDifficulty = false;
+        this.chooseDifficulty = true;
         window.location.reload();
     }
 }
