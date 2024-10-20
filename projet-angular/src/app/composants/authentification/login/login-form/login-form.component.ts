@@ -13,6 +13,7 @@ export class LoginFormComponent {
   loginForm: FormGroup;
   submitError : boolean;
 
+  // Création du contructeur
   constructor(private fb: FormBuilder, 
             protected authService : AuthentificationService
         ) {
@@ -23,6 +24,7 @@ export class LoginFormComponent {
     this.submitError = false;
   }
 
+  // Fonction d'envoi du formulaire, avec la gestion d'erreur avec la variable submitError
   onSubmit() {
     if (this.authService.login(this.loginForm.value['login'], this.loginForm.value['password'])) {
       this.submitError = false

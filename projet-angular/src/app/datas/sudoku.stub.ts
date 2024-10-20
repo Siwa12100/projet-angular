@@ -1,3 +1,5 @@
+//Stub du Sudoku
+
 export const sudokuStub = {
     "data": [
         [6,4,3,5,1,2,7,9,8],

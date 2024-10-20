@@ -1,2 +1,3 @@
-docker build -t angular-docker .
-docker run -p 4201:4200 angular-docker
+docker build -t projet-angular .
+
+docker run -d -p 80:80 projet-angular

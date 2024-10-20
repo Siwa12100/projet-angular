@@ -1,9 +1,11 @@
+<!-- Bouton du choix de la difficulté -->
 <div *ngIf="chooseDifficulty">
   <button mat-raised-button (click)="showGrid('easy')">Facile</button>
   <button mat-raised-button (click)="showGrid('medium')">Normal</button>
   <button mat-raised-button (click)="showGrid('hard')">Difficile</button>
 </div>
 
+<!-- Grille du Sudoku -->
 <div class="sudoku-grid">
     <table>
       <tr *ngFor="let row of userGrid; let i = index">
@@ -16,10 +18,12 @@
     </table>
 </div>
 
+<!-- Bouton de la vérification, et de l'envoi du Sudoku -->
 <button mat-raised-button *ngIf="isDisplayed" (click)="checkGrid()" class="sudoku-button">Vérifier</button>
 <p *ngIf="isDisplayed">Indices utilisés : {{ cluesUsed }}</p>
 <button mat-raised-button *ngIf="isDisplayed" (click)="submitGrid()" class="sudoku-button">Soumettre</button>
 
+<!-- Bouton pour rejouer une partie -->
 <div *ngIf="!isDisplayed && !chooseDifficulty">
   <button mat-raised-button (click)="replay()" class="sudoku-button">Rejouer</button>
 </div>

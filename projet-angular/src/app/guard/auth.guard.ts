@@ -7,16 +7,17 @@ import { CanActivate, Router } from '@angular/router';
 export class AuthGuard implements CanActivate {
 
   constructor(private router: Router) {}
-
+  // Composent qui permet la redirection de l'utilisateur si celui-ci n'est pas connecté
   canActivate(): boolean {
     const username = localStorage.getItem('username');
-    
+
+    // Si le 'username' est trouvé dans le localStorage, autoriser l'accès
     if (username) {
-      // Si le 'username' est trouvé dans le localStorage, autoriser l'accès
       return true;
-    } else {
-      // Sinon, rediriger vers la page de login (ou autre page)
-      this.router.navigate(['/login']); // Remplace '/login' par la route souhaitée
+    } 
+    // Sinon, rediriger vers la page de login
+    else {
+      this.router.navigate(['/login']); 
       return false;
     }
   }
