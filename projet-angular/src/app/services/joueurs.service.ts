@@ -13,10 +13,12 @@ export class JoueursService {
 
   constructor(protected httpClient: HttpClient) {}
 
+  // Fonction qui récupère les joueurs de l'API et renvoi un observable sur ces mêmes joueurs
   public recupererJoueurs(): Observable<Joueur[]> {
     return this.httpClient.get<Joueur[]>(this.urlApi);
   }
 
+  // Pareil mais pour le login des joueurs
   public recupererLogins(): Observable<string[]> {
     return this.recupererJoueurs().pipe(
       map(joueurs => joueurs.map(joueur => joueur.login))

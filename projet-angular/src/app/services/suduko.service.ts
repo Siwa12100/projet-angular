@@ -12,7 +12,8 @@ import { sudokuStub } from "../datas/sudoku.stub";
     protected urlApiSudoku : string = "https://664ba07f35bbda10987d9f99.mockapi.io/api/game"
   
     constructor(protected httpClient: HttpClient) {}
-  
+    
+    // Fonction qui récupère le sudoku depuis l'API, et si l'API renvoi rien, on récupère le sudoku depuis le stub
     getSudoku() {
         return this.httpClient.get(this.urlApi).pipe(
           catchError(error => {
@@ -22,6 +23,7 @@ import { sudokuStub } from "../datas/sudoku.stub";
         );
       }
     
+    // Fonction de récupération du Sudoku depuis le stub
     defaultSudoku() {
         return {
             "data": [ sudokuStub.data ],
@@ -31,6 +33,7 @@ import { sudokuStub } from "../datas/sudoku.stub";
         };
     }
 
+    // Fonction d'envoi du résultat du Sudoku dans l'API
     sendResult(clues: number){
         const data = {
             date: new Date(), 

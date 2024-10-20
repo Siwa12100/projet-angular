@@ -1,10 +1,13 @@
-<div *ngIf="chooseDifficulty">
-  <button mat-raised-button (click)="showGrid('easy')">Facile</button>
-  <button mat-raised-button (click)="showGrid('medium')">Normal</button>
-  <button mat-raised-button (click)="showGrid('hard')">Difficile</button>
+<!-- Bouton du choix de la difficulté -->
+<div class="sudoku-container" *ngIf="chooseDifficulty">
+  <button class="sudoku-buttons-centered gap" mat-raised-button (click)="showGrid('easy')">Facile</button>
+  <button class="sudoku-buttons-centered gap" mat-raised-button (click)="showGrid('medium')">Normal</button>
+  <button class="sudoku-buttons-centered gap" mat-raised-button (click)="showGrid('hard')">Difficile</button>
+  <button class="sudoku-buttons-centered gap" mat-raised-button (click)="showGrid('data')">debug</button>
 </div>
 
-<div class="sudoku-grid">
+<!-- Grille du Sudoku -->
+<div class="sudoku-grid" *ngIf="isDisplayed">
     <table>
       <tr *ngFor="let row of userGrid; let i = index">
         <td *ngFor="let cell of row; let j = index">
@@ -16,10 +19,19 @@
     </table>
 </div>
 
-<button mat-raised-button *ngIf="isDisplayed" (click)="checkGrid()" class="sudoku-button">Vérifier</button>
-<p *ngIf="isDisplayed">Indices utilisés : {{ cluesUsed }}</p>
-<button mat-raised-button *ngIf="isDisplayed" (click)="submitGrid()" class="sudoku-button">Soumettre</button>
+<!-- Bouton de la vérification, et de l'envoi du Sudoku -->
+<div class="sudoku-container">
+  <div class="sudoku-buttons-centered">
+    <div class="sudoku-buttons">
+      <button mat-raised-button *ngIf="isDisplayed" (click)="checkGrid()" class="sudoku-button">Vérifier</button>
+      <button mat-raised-button *ngIf="isDisplayed" (click)="submitGrid()" class="sudoku-button">Soumettre</button>
+    </div>
+    <p *ngIf="isDisplayed">Indices utilisés : {{ cluesUsed }}</p>
+  </div>
+</div>
 
-<div *ngIf="!isDisplayed && !chooseDifficulty">
-  <button mat-raised-button (click)="replay()" class="sudoku-button">Rejouer</button>
+
+<!-- Bouton pour rejouer une partie -->
+<div class="sudoku-container" *ngIf="!isDisplayed && !chooseDifficulty">
+  <button class="sudoku-buttons gap" mat-raised-button (click)="replay()">Rejouer</button>
 </div>

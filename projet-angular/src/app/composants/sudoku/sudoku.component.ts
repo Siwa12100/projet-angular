@@ -11,26 +11,31 @@ import { MatButtonModule } from '@angular/material/button';
     styleUrl: './sudoku.component.css'
 })
 export class SudokuComponent {
+    // Variables pour effectuer le Sudoku
     solutionGrid: number[][] = [];
     userGrid: number[][] = [];
     originalGrid: number[][] = [];
     cluesUsed: number = 0;
+
+    // Variables pour savoir combien de colonnes seront affichés dans le Sudoku
     displayedColumns : String[] = [];
+
+    // Variable pour savoir si le Sudoku est affiché ou non
     isDisplayed : boolean = false;
+
+    // Variable pour savoir si les boutons du choix de la difficulté sont affichés ou non
     chooseDifficulty : boolean = true;
 
     constructor(protected sudokuService: SudokuService) {}
 
-    ngOnInit(): void {
-        
-    }
-
     showGrid(difficulty : any ){
         this.chooseDifficulty = false;
         this.displayedColumns = this.userGrid.map((_, index) => `col${index}`);
+        // Check si le Sudoku a déjà été complété ou non
         if(localStorage.getItem('sudoku_key') != "true"){
             localStorage.setItem('sudoku_key', 'false')
             this.isDisplayed = true;
+            // Récupère le sudoku depuis l'API si il existe pas dans le local storage
             if(localStorage.getItem('sudoku') == null){
                 this.sudokuService.getSudoku().subscribe((response: any) => {
                     this.userGrid = response[difficulty];
@@ -39,6 +44,7 @@ export class SudokuComponent {
                     localStorage.setItem('sudoku', JSON.stringify(response));
                 });
             }
+            // Sinon récupère depuis le local storage
             else{
                 const data = JSON.parse(localStorage.getItem('sudoku')!);
                 this.userGrid = data![difficulty];
@@ -53,10 +59,12 @@ export class SudokuComponent {
     }
 
     onCellInput(row: number, col: number, event: KeyboardEvent): void {
+        // À chaque appuie sur la touche entrée
         if (event.key === 'Enter') {
             const inputElement = event.target as HTMLInputElement;
             const value = inputElement.value;
 
+            //Vérification de la valeur entrée si vide, un caractère ou un nombre supérieur à 10, ça passe pas
             if (value.trim() !== '') {
                 const parsedValue = parseInt(value, 10);
                 if (!isNaN(parsedValue) && parsedValue >= 1 && parsedValue <= 9) {
@@ -71,6 +79,7 @@ export class SudokuComponent {
     }
 
     checkGrid(submit : boolean = false): void {
+        // Test de la validité du Sudoku
         for (let i = 0; i < this.userGrid.length; i++) {
             for (let j = 0; j < this.userGrid[i].length; j++) {
                 if (this.userGrid[i][j] !== this.solutionGrid[i][j]) {
@@ -78,14 +87,17 @@ export class SudokuComponent {
                 }
             }
         }
+        // Incrémentation du l'indice de vérification
         if(!submit){
             this.cluesUsed += 1;
         }
     }
 
     submitGrid(): void {
-        let isCorrect = true; // Flag si grille correcte
+        // Flag si grille correcte
+        let isCorrect = true; 
 
+        // Test de la validité du Sudoku
         for (let i = 0; i < this.userGrid.length; i++) {
             for (let j = 0; j < this.userGrid[i].length; j++) {
                 if (this.userGrid[i][j] !== this.solutionGrid[i][j]) {
@@ -94,19 +106,23 @@ export class SudokuComponent {
             }
         }
 
+        // Si c'est correcte, alors on envoi le résultat grâce au service
         if (isCorrect) {
             this.sudokuService.sendResult(this.cluesUsed);
             localStorage.setItem('sudoku_key', "true");
-            console.log('Grille validée avec succès !');
-        } else {
+            this.isDisplayed = false;
+            this.chooseDifficulty = false;
+        } 
+        // Sinon, on lance la fonction checkGrid() qui va incrémenter le score de vérification
+        else {
             this.checkGrid();
-            console.log('La grille contient des erreurs. Indices incrémentés.');
         }
     }
 
+    // Fonction pour rejouer la partie
     replay(){
         localStorage.setItem('sudoku_key', 'false')
-        this.chooseDifficulty = false;
+        this.chooseDifficulty = true;
         window.location.reload();
     }
 }

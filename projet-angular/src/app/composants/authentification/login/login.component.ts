@@ -9,12 +9,6 @@ import { LoginFormComponent } from './login-form/login-form.component';
     templateUrl: './login.component.html',
     styleUrl : './login.component.css'
   })
-  export class LoginComponent implements OnInit {
+  export class LoginComponent{
     constructor(protected localStorage : LocalStorageService) {}
-  
-    ngOnInit() : void {
-        if(!this.localStorage.getData('Con')){
-            this.localStorage.saveData('Con','vers Jean')
-        }
-    }
   }

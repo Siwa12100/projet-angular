@@ -55,3 +55,30 @@ input:disabled {
 .sudoku-button{
     background-color: beiges;
 }}
+
+.sudoku-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+    height: auto;
+}
+
+.sudoku-buttons-centered {
+    display: flex;
+    align-items: center; 
+}
+
+.sudoku-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sudoku-buttons + p {
+    margin-left: 20px;
+}
+
+.gap{
+    margin: 30px !important;
+}
