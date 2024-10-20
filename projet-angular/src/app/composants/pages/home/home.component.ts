@@ -10,6 +10,7 @@ import { DatePipe } from "@angular/common";
     standalone: true,
     imports: [JoueurComponent, DatePipe],  
     templateUrl: './home.component.html',
+    styleUrl : './home.component.css'
   })
   export class HomeComponent implements OnInit {
     protected currentDate : Date = new Date()

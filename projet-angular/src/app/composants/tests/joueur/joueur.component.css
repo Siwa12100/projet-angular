@@ -8,7 +8,8 @@
   
   .joueur-container h4 {
     margin: 0;
-    font-size: 18px;
+    font-size: 1.5vw;
+    font-weight: 700;
   }
   
   .joueur-container ul {

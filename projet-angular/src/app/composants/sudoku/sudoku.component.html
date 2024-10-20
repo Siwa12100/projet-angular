@@ -1,4 +1,8 @@
-<!-- Bouton du choix de la difficulté -->
+<div class="contenu">
+  <h1>
+    Sudoku
+  </h1>
+  <!-- Bouton du choix de la difficulté -->
 <div class="sudoku-container" *ngIf="chooseDifficulty">
   <button class="sudoku-buttons-centered gap" mat-raised-button (click)="showGrid('easy')">Facile</button>
   <button class="sudoku-buttons-centered gap" mat-raised-button (click)="showGrid('medium')">Normal</button>
@@ -34,4 +38,5 @@
 <!-- Bouton pour rejouer une partie -->
 <div class="sudoku-container" *ngIf="!isDisplayed && !chooseDifficulty">
   <button class="sudoku-buttons gap" mat-raised-button (click)="replay()">Rejouer</button>
+</div>
 </div>

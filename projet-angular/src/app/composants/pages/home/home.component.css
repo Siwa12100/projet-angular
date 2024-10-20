@@ -1,0 +1,13 @@
+.contenu {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14vw;
+}
+
+h3 {
+
+    margin-top: 3vw;
+}
